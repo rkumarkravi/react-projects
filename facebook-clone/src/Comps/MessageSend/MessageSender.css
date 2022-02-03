@@ -1,0 +1,69 @@
+.messageSender{
+    background-color: white;
+    box-shadow: 0px 5px 08px -9px rgba(0, 0, 0, 0.774);
+    width: 70%;
+    padding: 1em;
+    margin-top: 1em;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.messageSender__form{
+    display: flex;
+    align-items: center;
+}
+.messageSender__form>form{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.messageSender__form>form>input{
+    outline-style: none;
+    padding: 0.8em;
+    background-color: #f2f3f5;
+    border: none;
+    margin-left: 1em;
+    border-radius: 10px;
+}
+.messageSender__form>form>button{
+    display: none;
+}
+.meaasgeSender__form_input1{
+    width: 100%;
+}
+.messageSender__buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+.messageSender__buttons>.messageSender__button{
+    display: flex;
+    cursor: pointer;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 4px 1px 9px -7px rgb(0 0 0 / 77%);
+}
+.messageSender__buttons>.messageSender__button:hover{
+    background-color: #f2f3f5;
+}
+.messageSender__button>h4{
+    color: #848587;
+    margin-left: 0.5em;
+}
+.messageSender__button:nth-child(1){
+    color: red;
+}
+.messageSender__button:nth-child(2){
+    color: green;
+}
+.messageSender__button:nth-child(3){
+    color: #ffa500;
+}
+
+@media screen and (max-width: 600px) {
+    .ads{
+        display: none;
+    }
+    
+}

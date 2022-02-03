@@ -1,0 +1,61 @@
+.Post{
+    background-color: white;
+    box-shadow: 0px 5px 08px -9px rgba(0, 0, 0, 0.774);
+    width: 70%;
+    padding: 0.8em;
+    margin-top: 1em;
+    border-radius: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.Post__info{
+    display: flex;
+    align-items: center;
+}
+.Post__detail{
+    margin-left: 1em;
+}
+.Post__detail>.Post__username{
+    font-weight: bold;
+}
+.Post__detail>.Post__timestamp{
+    font-weight: lighter;
+    font-size: small;
+    color: gray;
+}
+.Post_Text{
+    margin:1em 0;
+}
+.Post_image{
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    aspect-ratio: 2/1;
+}
+.Post__buttons{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 0.5em;
+}
+.Post__button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: gray;
+    font-size: large;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0.4em;
+}
+.Post__button:hover{
+    background-color: #f1f2f5;
+}
+.Post__button>.MuiSvgIcon-root{
+    color: gray;
+}
+.Post__button>h4{
+    margin-left: 0.8em;
+}

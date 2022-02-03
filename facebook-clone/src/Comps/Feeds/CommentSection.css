@@ -1,0 +1,21 @@
+.Comment{
+    margin-top:0.2em;
+    width: 97%;
+}
+.Comment>form>input{
+    outline-style: none;
+    background-color: #f1f2f5;
+    border: none;
+    padding: 0.8em;
+    border-radius: 20px;
+    width: 97%;
+}
+.Comment>form>button{
+    display: none;
+}
+.comments{
+    display: flex;
+    margin: 0.5em 0;
+    flex-direction: column;
+    width: 100%;
+}

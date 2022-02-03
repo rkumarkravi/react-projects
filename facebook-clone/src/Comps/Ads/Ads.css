@@ -1,0 +1,9 @@
+.ads{
+    width: 15em;
+}
+@media screen and (max-width: 600px) {
+    .ads{
+        display: none;
+    }
+    
+}

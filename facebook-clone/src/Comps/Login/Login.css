@@ -1,0 +1,26 @@
+.SignIn{
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+.SignIn>div>button{
+  color: #fff;
+  font-size: x-large;
+  text-transform: capitalize;
+  background-color: #227df2;
+  padding: 1em 4em;
+  font-weight: bold;
+  border: none;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0px 5px 20px -4px rgb(34 125 242);
+  transition: all 0.2s ease-in-out;
+}
+.SignIn>div>button:hover{
+  box-shadow: 0px 5px 2px -4px rgb(34 125 242);
+}
+.SignIn>div>h1{
+  color: #227df2;
+  margin-bottom: 1em;
+}
