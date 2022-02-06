@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 function Navbar() {
+  const [navBG, showNavBG] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        showNavBG(true);
+      } else {
+        showNavBG(false);
+      }
+    });
+    return () => {
+      window.removeEventListener("scroll");
+    };
+  }, []);
+
   return (
-    <div className="navbar">
+    <div
+      className="navbar"
+      style={{ backgroundColor: navBG ? "#1f1f2aa4" : "transparent" }}
+    >
       <img
         className="branding__image"
         alt="NETFLIX_CLONE"

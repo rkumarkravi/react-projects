@@ -1,9 +1,11 @@
 .navbar {
   height: 3em;
-  position: sticky;
+  position: fixed;
   top: 0;
-  background-color: #1f1f2aa4;
+  background-color: transparent;
   z-index: 100;
+  width: 100%;
+  transition: all 100ms ease-in-out;
 }
 .branding__image {
   height: 3em;
