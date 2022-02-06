@@ -1,6 +1,8 @@
 .Row__row-style {
   display: flex;
   overflow: hidden;
+  z-index: 1;
+  animation: scroll-anim 2s forwards 0.1s ease-in;
 }
 .Row__posterConfig {
   width: 10em;
@@ -18,4 +20,15 @@
 }
 .Row > h2 {
   margin-left: 0.4em;
+}
+
+@keyframes scroll-anim {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
