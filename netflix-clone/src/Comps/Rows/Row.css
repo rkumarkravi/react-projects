@@ -1,0 +1,21 @@
+.Row__row-style {
+  display: flex;
+  overflow: hidden;
+}
+.Row__posterConfig {
+  width: 10em;
+  margin: 0.5em;
+  transition: all 110ms;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 8px 11px 20px -9px rgba(0, 0, 0, 0.774);
+}
+.Row__posterConfig:hover {
+  transform: scale(1.03);
+}
+.Row:nth-child(1) {
+  margin-top: -12em;
+}
+.Row > h2 {
+  margin-left: 0.4em;
+}

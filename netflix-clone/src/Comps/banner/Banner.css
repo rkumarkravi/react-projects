@@ -1,0 +1,44 @@
+.main-banner {
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: inset 80px 80px 1199px 40px #101010;
+  transition: all 2s;
+}
+
+.main-banner:hover {
+  box-shadow: inset 19px 0px 192px 16px #101010;
+}
+
+.buttons {
+  margin-top: 1em;
+}
+.buttons > button {
+  padding: 0.5em;
+  border: none;
+  margin: 0.5em;
+  width: 10em;
+  cursor: pointer;
+  background-color: #42424296;
+  color: white;
+  font-weight: bold;
+}
+.buttons > button:hover {
+  background-color: white;
+  color: #42424296;
+}
+.desc {
+  font-size: 1.5em;
+  width: 50%;
+  margin-top: 0.8em;
+  text-shadow: 4px 3px 14px black;
+}
+.new-banner {
+  margin-left: 1em;
+  transform: translateY(6em);
+}
+.new-banner > .title {
+  font-size: 4em;
+  font-weight: bold;
+}

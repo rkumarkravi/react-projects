@@ -1,0 +1,11 @@
+.navbar {
+  height: 3em;
+  position: sticky;
+  top: 0;
+  background-color: #1f1f2aa4;
+  z-index: 100;
+}
+.branding__image {
+  height: 3em;
+  margin-left: 1em;
+}
