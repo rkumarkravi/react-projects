@@ -1,0 +1,20 @@
+.image-title-row,
+.big-image-title-row {
+  margin-top: 1em;
+}
+.trackTitle {
+  margin-bottom: 0.5em;
+}
+
+.image-title-row > .cards {
+  width: 95%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 2em;
+  row-gap: 1em;
+}
+
+.big-image-title-row > .cards {
+  display: inline-flex;
+  gap: 0.4em;
+}

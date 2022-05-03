@@ -1,0 +1,24 @@
+.IconWithName,
+.IconWithName--active {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+  color: gray;
+  cursor: pointer;
+  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.IconWithName:hover {
+  color: white;
+}
+
+.IconWithName--active {
+  color: white;
+  cursor: default;
+}
+
+.IconWithName > h4,
+.IconWithName--active > h4 {
+  margin-left: 1em;
+}

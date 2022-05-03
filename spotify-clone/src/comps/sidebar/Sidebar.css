@@ -1,0 +1,16 @@
+.Sidebar {
+  width: 18em;
+  background-color: black;
+}
+.Sidebar__nav {
+  padding-left: 1em;
+}
+.Sidebar__Branding {
+  width: 9em;
+  margin-bottom: 2em;
+  margin-top: 1em;
+}
+.MuiDivider-root {
+  border-color: gray !important;
+  margin: 1em 1em 1em 0em !important;
+}

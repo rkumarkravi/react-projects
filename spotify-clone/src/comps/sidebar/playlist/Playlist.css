@@ -1,0 +1,28 @@
+.playlist {
+  line-height: 2em;
+  margin-left: 1em;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-height: 61vh;
+  /* width: 17em; */
+}
+.playlist > p {
+  cursor: pointer;
+  color: gray;
+}
+
+.playlist > p:hover {
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 1em;
+  background-color: gainsboro;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 1em;
+  background-color: gray;
+}
