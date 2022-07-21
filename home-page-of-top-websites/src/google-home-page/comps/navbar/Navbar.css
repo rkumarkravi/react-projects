@@ -1,0 +1,23 @@
+.navbar-style{
+    padding:1em;
+}
+.stack-style > a{
+color:black;
+text-decoration:none;
+}
+.other-products{
+    position: relative;
+}
+.other-products-menu{
+    visibility: hidden;
+    position:absolute;
+    transform: scale(0) translateY(-10em);
+    left:-8em;
+    top: 2.5em;
+    transition: transform 0.2s ease-in-out;
+}
+
+.other-products:hover .other-products-menu{
+    visibility: visible;
+    transform: scale(1) translateY(0);
+}

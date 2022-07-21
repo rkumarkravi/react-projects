@@ -1,0 +1,35 @@
+:root{
+    --bacground-color:white;
+    --text-color:black;
+}
+
+.google-style{
+    background-color: var(--bacground-color);
+    color: var(--text-color);
+}
+
+.main-body{
+    margin-top:8em;
+}
+
+.main-body input{
+  border:none;
+  outline:none;
+  width: 45em;
+  padding: 1em;
+  border:1px solid rgba(128, 128, 128, 0.564);
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+.main-body input:hover{
+    box-shadow: 0 0 05px gray;
+}
+
+.languages-style > span:nth-child(n){
+    color: blue;
+    cursor: pointer;
+}
+.languages-style > span:first-child{
+    color: black;
+    cursor: auto;
+}

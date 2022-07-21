@@ -1,0 +1,25 @@
+.grid-style{
+    display: grid;
+    grid-template: auto / auto auto auto;
+    padding: 1em;
+    gap: 1em;
+}
+
+.other-style-product{
+    width: 4em;
+    height: 4em;
+}
+
+.bind-icon-with-text{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0.2em;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.bind-icon-with-text:hover{
+    background-color: #0245fe38;
+}

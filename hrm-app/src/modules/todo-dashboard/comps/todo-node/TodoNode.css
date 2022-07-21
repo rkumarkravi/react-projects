@@ -1,0 +1,27 @@
+.todo-node{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 6em;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    width: 15em;
+}
+.todo-node:hover{
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.2);
+}
+.todo-node-normal-other{
+    border: 5px solid #7b7eff;
+    background: #6669f1bf;
+}
+.todo-node-normal-red{
+    border: 5px solid #42a9b89e;
+    background: #42a9b89e;
+}
+.content{
+
+}

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Sidebar.css";
+import { BrowserRouter as Link } from 'react-router-dom';
 import IconWithName from "./IconWithName/IconWithName";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
@@ -21,8 +22,8 @@ function Sidebar() {
             ></path>
           </svg>
         </div>
-        <IconWithName Icon={HomeIcon} title="Home" active="true" />
-        <IconWithName Icon={SearchIcon} title="Search" active="false" />
+        <a href="/"><IconWithName Icon={HomeIcon} title="Home" active="true" /></a>
+        <a href="/search"><IconWithName Icon={SearchIcon} title="Search" active="false" /></a>
         <Divider />
         <IconWithName
           Icon={LibraryBooksIcon}
