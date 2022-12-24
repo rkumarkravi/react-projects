@@ -1,0 +1,140 @@
+{
+  "current-learning": [
+    {
+      "title": "HTML"
+    },
+    {
+      "title": "Java"
+    },
+    {
+      "title": "Js"
+    },
+    {
+      "title": "Python"
+    },
+    {
+      "title": "CSS"
+    }
+  ],
+  "programming-langs": [
+    {
+      "title": "HTML"
+    },
+    {
+      "title": "Java"
+    },
+    {
+      "title": "Js"
+    },
+    {
+      "title": "Python"
+    },
+    {
+      "title": "CSS"
+    }
+  ],
+  "topics": [
+    {
+      "name": "HTML",
+      "topics": [
+        {
+          "title": "HTML Introduction"
+        },
+        {
+          "title": "HTML Editors"
+        },
+        {
+          "title": "HTML Basic"
+        },
+        {
+          "title": "HTML Elements"
+        },
+        {
+          "title": "HTML Attributes"
+        },
+        {
+          "title": "HTML Headings"
+        },
+        {
+          "title": "HTML Paragraphs"
+        },
+        {
+          "title": "HTML Styles"
+        },
+        {
+          "title": "HTML Formatting"
+        },
+        {
+          "title": "HTML Quotations"
+        },
+        {
+          "title": "HTML Comments"
+        },
+        {
+          "title": "HTML CSS"
+        },
+        {
+          "title": "HTML Links"
+        },
+        {
+          "title": "HTML Favicon"
+        },
+        {
+          "title": "HTML Tables",
+          "st": [
+            {
+              "title": "Table Row"
+            },
+            {
+              "title": "Table Data"
+            },
+            {
+              "title": "Introduction"
+            }
+          ]
+        },
+        {
+          "title": "HTML Classes"
+        },
+        {
+          "title": "HTML Id"
+        },
+        {
+          "title": "HTML Iframes"
+        },
+        {
+          "title": "HTML JavaScript"
+        },
+        {
+          "title": "HTML File Paths"
+        },
+        {
+          "title": "HTML Head"
+        },
+        {
+          "title": "HTML Colors"
+        },
+        {
+          "title": "Links"
+        },
+        {
+          "title": "HTML Images"
+        },
+        {
+          "title": "HTML Lists",
+          "st": [
+            {
+              "title": "Unorderd List"
+            },
+            {
+              "title": "Ordered List"
+            }
+          ]
+        },
+        {
+          "title": "HTML Forms"
+        }
+      ]
+    }
+  ]
+}

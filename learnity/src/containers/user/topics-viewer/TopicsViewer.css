@@ -1,0 +1,14 @@
+.topic-style{
+    color: white;
+    width: 96.5%;
+}
+
+.MuiTreeItem-label{
+    font-size: 20px !important;
+}
+
+.topic-style >* >li {
+    padding: 1em;
+    margin-bottom: 0.2em;
+    width: 100%;
+}

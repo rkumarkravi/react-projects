@@ -1,0 +1,11 @@
+.add-topic{
+    display: flex;
+}
+.add-topic>*>h2{
+    color: white;
+}
+.content-container{
+    width: 80%;
+}
+.tools-container{
+}

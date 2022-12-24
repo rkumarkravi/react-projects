@@ -1,0 +1,23 @@
+.App{
+  display: flex;
+}
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  font-size: calc(10px + 2vmin);
+  color: white;
+  background-color: #282c34;
+}
+
+.route-container{
+  padding-left: 1em;
+  width: 100%;
+}
+
+.App-header SideNav{
+
+}
+
+a{
+  text-decoration: none;color: black;
+}

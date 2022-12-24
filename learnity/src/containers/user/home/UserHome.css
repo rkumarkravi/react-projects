@@ -1,0 +1,28 @@
+.home-style{
+    color: white;
+}
+
+.title-style{
+    padding-left: 0.5em;
+}
+
+.paper-style{
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.title-style-opaque{
+    position: relative;
+    left: 0.3em;
+    top: -1.6em;
+    font-size: 5em;
+    color: #0000005e;
+    transition: all 0.5s;
+}
+
+.paper-style:hover >*> .title-style-opaque{
+    /* left: 0.5em !important;
+    top: -3.3em !important;
+    font-size: 1em; */
+    color: black;
+}
