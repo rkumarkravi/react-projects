@@ -22,11 +22,12 @@ import { ThemeProvider } from "@mui/material/styles";
 import defaultTheme from "../../config/Theme";
 import Tooltip from "@mui/material/Tooltip";
 import TopicIcon from '@mui/icons-material/Topic';
-
+import FolderCopyIcon from '@mui/icons-material/FolderCopy';
 import { Link } from "react-router-dom";
 import constants from "./../../config/config";
 
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const drawerWidth = 240;
 const sideNavMenus = {
@@ -55,7 +56,7 @@ const sideNavMenus = {
   ],
   "admin": [
     { text: "Home", icon: <HomeIcon color="primary" />, routePath: "/admin" },
-    { text: "Add Content", icon: <TopicIcon color="primary" />, routePath: "/admin/addContent" },
+    { text: "Show Courses", icon: <FolderCopyIcon color="primary" />, routePath: "/admin/showCourses" },
   ],
 };
 
@@ -108,6 +109,7 @@ function SideNav() {
   const [open, setOpen] = React.useState(true);
   const location = useLocation();
   const currentRoutePath = location.pathname;
+  const user=useSelector(state=>state.user);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -155,15 +157,16 @@ function SideNav() {
                 </Typography>
               )}
             </DrawerHeader>
+            <h1>Welcome {user.name}</h1>
             <Divider />
-            <List>
+            <List >
               {sideNavMenus[currentRoutePath.split("/")[1]].map((data, index) => (
                 <>
                 {data.break && <Divider key={data.text+"_"+index}/>}
-                <Tooltip title={data.text} placement="right" key={data.text}>
+                <Tooltip title={data.text} placement="right" key={data.text+index}>
                   <Link to={data.routePath} relative="route">
                     <ListItem
-                      key={data.text}
+                      key={data.text+index}
                       disablePadding
                       sx={{ display: "block" }}
                     >

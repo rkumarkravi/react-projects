@@ -1,0 +1,15 @@
+.todo-node {
+  padding: 1em;
+  border-radius: 2em;
+}
+
+.todo-node > div {
+  display: grid;
+  grid-template-columns: 60% 36% 4%;
+  text-transform: capitalize;
+  text-shadow: 0px 1px 2px black;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}

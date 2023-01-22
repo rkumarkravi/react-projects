@@ -4,6 +4,7 @@ const defaultTheme = createTheme({
     palette: {
       primary: {
         main: '#282c34',
+        icon: '#ffffff',
       },
       paper: {
         main: '#ffffff',

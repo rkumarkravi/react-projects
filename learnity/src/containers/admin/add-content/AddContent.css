@@ -1,0 +1,20 @@
+.add-topic {
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+.add-topic > * > h2 {
+  color: white;
+}
+.content-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;    padding: 1em;
+}
+.tools-container {
+}
+.Content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  align-items: baseline;
+}

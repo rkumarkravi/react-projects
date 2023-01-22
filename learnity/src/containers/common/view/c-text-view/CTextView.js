@@ -4,14 +4,11 @@ import Box from "@mui/material/Box";
 function CText(props) {
   return (
     <Box
-      sx={{
-        width: "100%",
+      sx={{...JSON.parse(props?.style),
+        width: "98%",
         height: "auto",
+        padding: "0.5em",
         backgroundColor: "primary.dark",
-        "&:hover": {
-          backgroundColor: "primary.main",
-          opacity: [0.9, 0.8, 0.7],
-        },
       }}
     >
         {props.value}

@@ -1,0 +1,10 @@
+.view-edit-topic-style > .topics-container {
+  display: grid;
+  gap: 1em;
+  padding: 0 1em 1em 0;
+  grid-template-columns: auto auto auto auto;
+}
+
+.view-edit-topic-style > h2 {
+  color: white;
+}

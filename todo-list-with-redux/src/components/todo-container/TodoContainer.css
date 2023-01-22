@@ -1,0 +1,38 @@
+.todo-container {
+  display: grid;
+  justify-content: center;
+}
+.user-input-section {
+  display: grid;
+  grid-template-columns: auto 20%;
+  /* width: 30em; */
+  gap :0.5em;
+}
+
+.user-input-section > input {
+  font-size: 2em;
+  border-radius: 0.5em;
+  padding-left: 0.5em;
+  border-color: black;
+}
+
+.user-input-section > button {
+  border-radius: 0.5em;
+  font-size: 1em;
+  background-color: lightgrey;
+  border: none;
+}
+.user-input-section > button:hover{
+    background-color: greenyellow;
+}
+.user-input-section > button:active{
+    background-color: green;
+    color: white;
+}
+
+.todo-nodes{
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+    gap:1em;
+}

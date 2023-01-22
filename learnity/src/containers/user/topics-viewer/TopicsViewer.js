@@ -27,6 +27,9 @@ function TopicViewer(props) {
       .catch((exp) => console.log(exp));
   }, []);
 
+  const navigateToRoute=function(obj){
+    navigate(`/user/content/${obj.id}`,{state:{topicTitle:obj.title,courseId:courseId}});
+  }
 
   return (
     <div className="topic-style">
@@ -38,7 +41,7 @@ function TopicViewer(props) {
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
           sx={{
-            width: "78vw",
+            width: "auto",
           }}
         >
           {topicData
@@ -54,7 +57,7 @@ function TopicViewer(props) {
                       marginTop: "0.2em",
                       color: "topics.node.foreground !important",
                     }}
-                    onIconClick={navigate(`/user/content/${topic.id}`,{state:{topicTitle:topic.title}})}
+                    onClick={()=>navigateToRoute(topic)}
                   >
                     {topic.subTopics &&
                       topic.subTopics.map((st, iIndex) => {
@@ -71,7 +74,7 @@ function TopicViewer(props) {
                               marginTop: "0.2em",
                               color: "topics.subnode.foreground !important",
                             }}
-                            onIconClick={navigate(`/user/content/${st.id}`,{state:{topicTitle:topic.title}})}
+                            onIconClick={()=>navigateToRoute(st)}
                           />
                         );
                       })}
