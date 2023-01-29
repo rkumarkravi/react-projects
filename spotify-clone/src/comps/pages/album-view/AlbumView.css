@@ -1,0 +1,54 @@
+.top-track-view{
+    padding: 1em;
+    display: flex;
+}
+.top-track-view > img{
+    height: 200px;
+    width: 200px;
+}
+.top-track-view > ul{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.top-track-view > ul > li:nth-child(1){
+  text-transform: uppercase;
+}
+.top-track-view > ul > li:nth-child(2){
+  font-size: 5em;font-weight: bold;
+}
+.top-track-view > ul > li:nth-child(4){
+  font-weight: bold;
+}
+.track-view {
+  padding: 1em;
+}
+.track-view > table > thead {
+  border-bottom: 1px solid white;
+}
+.track-view > table > thead > * > th,
+.track-view > table > tbody > * > td {
+  text-align: left;
+  padding: 0.6em;
+}
+.track-view > table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.track-node:hover {
+  background-color: #2a2a2a;
+  cursor: pointer;
+}
+.track-node > td:first-child {
+  width: 3em;
+}
+.track-node:hover > td:first-child {
+  color: transparent;
+}
+.track-node:hover > td:first-child::after {
+  content: "▶";
+  color: white;
+  position: relative;
+  left: -10px;
+}

@@ -2,9 +2,10 @@ import React from "react";
 import "./Track.css";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import { grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 function Track({ type, obj }) {
   return (
-    <>
+    <Link to={"/album"} state={{albumData:obj}}>
       {type === "image-title" && (
         <div className={type}>
           <div className="image-text">
@@ -25,7 +26,7 @@ function Track({ type, obj }) {
           </div>
         </div>
       )}
-    </>
+    </Link>
   );
 }
 

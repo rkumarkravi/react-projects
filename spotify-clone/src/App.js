@@ -1,48 +1,60 @@
 import "./App.css";
-import {createContext,useState} from "react";
+import { createContext } from "react";
 import Sidebar from "./comps/sidebar/Sidebar";
 import Navbar from "./comps/navbar/Navbar";
 import TopBody from "./comps/body/topbody/TopBody";
 import Control from "./comps/control/Control";
-import { Outlet, Link, useRoutes, useParams } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import Search from "./comps/pages/Search/Search";
+import { Alert, Snackbar } from "@mui/material";
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { snackBarAction } from "./redux-conf/slices/generalSlice";
+import AlbumView from './comps/pages/album-view/AlbumView';
 export const UserContext = createContext();
 function App() {
+  const state = useSelector((state) => state.state);
+  const dispatch=useDispatch();
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch(snackBarAction(false));
+  };
   let routes = [
     {
       path: "/",
       element: <TopBody />,
-      // children: [
-      //   { index: true, element: <Home /> },
-      //   {
-      //     path: "/courses",
-      //     element: <Courses />,
-      //     children: [
-      //       { index: true, element: <CoursesIndex /> },
-      //       { path: "/courses/:id", element: <Course /> }
-      //     ]
-      //   },
-      //   { path: "*", element: <NoMatch /> }
-      // ]
     },
     {
       path: "/search",
       element: <Search />,
+    },{
+      path: "/album",
+      element: <AlbumView />,
     },
   ];
   let element = useRoutes(routes);
-  const [user, setUser] = useState("");
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <>
       <div className="app">
+        <div className="main">
         <Sidebar />
         <div className="app__nav-body">
           <Navbar />
           {element}
         </div>
-      </div>
+        </div>
+        
       <Control />
-    </UserContext.Provider>
+      </div>
+      <Snackbar open={state.errorMsg.show} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom',
+          horizontal: 'right' }}>
+        <Alert onClose={handleClose} severity={state.errorMsg.severity} sx={{ width: '100%' }}>
+        {state.errorMsg.message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 

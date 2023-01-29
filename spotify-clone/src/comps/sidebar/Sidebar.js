@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Sidebar.css";
-import { BrowserRouter as Link } from 'react-router-dom';
 import IconWithName from "./IconWithName/IconWithName";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,7 +8,10 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Divider from "@mui/material/Divider";
 import Playlist from "./playlist/Playlist";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 function Sidebar() {
+  const userData = useSelector(state=>state.state.userData);
   return (
     <div className="Sidebar">
       <div className="Sidebar__nav">
@@ -22,8 +24,8 @@ function Sidebar() {
             ></path>
           </svg>
         </div>
-        <a href="/"><IconWithName Icon={HomeIcon} title="Home" active="true" /></a>
-        <a href="/search"><IconWithName Icon={SearchIcon} title="Search" active="false" /></a>
+        <Link to="/"><IconWithName Icon={HomeIcon} title="Home" active="true" /></Link>
+        <Link to="/search"><IconWithName Icon={SearchIcon} title="Search" active="false" /></Link>
         <Divider />
         <IconWithName
           Icon={LibraryBooksIcon}
@@ -41,6 +43,8 @@ function Sidebar() {
           active="false"
         />
         <Divider />
+        
+      {userData.name}
       </div>
       <div className="playlist-grow">
         <Playlist />

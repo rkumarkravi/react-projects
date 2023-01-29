@@ -4,17 +4,12 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { UserContext } from "../../../../App";
 
 function TrackView({ obj, i }) {
-    const [context, setContext] = React.useContext(UserContext);
-    const addToLikedSongs=()=>{
-        setContext("skjhsjk");
-        console.log(context);
-    }
   return (
     <tr>
       <td>{i}</td>
       <td>{obj.musicName}</td>
       <td>{obj.createdDate}</td>
-      <td  onClick={addToLikedSongs}>
+      <td >
         <IconWithName
           Icon={FavoriteBorderIcon}
           active="false"

@@ -1,4 +1,4 @@
-import axios from "../../../service/dataService";
+import {axios} from "../../../service/dataService";
 import React, { useEffect } from "react";
 import "./Search.css";
 import TrackView from "./TrackView/TrackView";

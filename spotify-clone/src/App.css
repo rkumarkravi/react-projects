@@ -1,12 +1,16 @@
 .app {
-  display: flex;
+  display: grid;
   background: #282828;
   color: white;
-  height: 90vh;
   overflow: hidden;
 }
+.main {
+  grid-template-columns: 22% 78%;
+  display: grid;
+  height: 100vh;
+  grid-template-rows: 91.5% auto;
+}
 .app__nav-body {
-  width: 98%;
   overflow-y: scroll;
   overflow-x: hidden;
   scroll-behavior: smooth;

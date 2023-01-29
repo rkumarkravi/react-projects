@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { axios } from "../../../service/dataService";
 import "./Playlist.css";
-import axios from "../../../service/dataService";
 function Playlist() {
   const [playlistData, setPlaylist] = useState([]);
   useEffect(() => {

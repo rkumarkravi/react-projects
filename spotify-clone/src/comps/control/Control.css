@@ -1,6 +1,7 @@
 .Control {
-  height: 4em;
+  height:6.4em;
   background: #181818;
   bottom: 0;
   width: 100%;
+  position: fixed;
 }
