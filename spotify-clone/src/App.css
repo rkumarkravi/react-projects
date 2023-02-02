@@ -8,10 +8,9 @@
   grid-template-columns: 22% 78%;
   display: grid;
   height: 100vh;
-  grid-template-rows: 91.5% auto;
 }
 .app__nav-body {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
   scroll-behavior: smooth;
   background: #181818;

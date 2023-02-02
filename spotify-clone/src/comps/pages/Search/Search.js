@@ -3,8 +3,8 @@ import React, { useEffect } from "react";
 import "./Search.css";
 import TrackView from "./TrackView/TrackView";
 function Search() {
-  const [searchData, setSearchData] = React.useState([]);
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchData, setSearchData] = React.useState("");
+  const [searchResult, setSearchResult] = React.useState("");
   useEffect(() => {
     console.log(searchData);
     searchData &&
@@ -12,12 +12,12 @@ function Search() {
         .get("search/music/" + searchData)
         .then((res) => {
           console.log(res.data);
-          setSearchValue(res.data);
+          setSearchResult(res.data);
         })
         .catch((err) => {});
   }, [searchData]);
   return (
-    <div>
+    <div className="search-container">
       <h2>Search</h2>
       <input
         type={"text"}
@@ -28,7 +28,7 @@ function Search() {
         }}
       />
       <div className="searchData">
-        {searchValue && (
+        {searchResult && (
           <table>
             <thead>
               <tr>
@@ -39,8 +39,8 @@ function Search() {
               </tr>
             </thead>
             <tbody>
-              {searchValue &&
-                searchValue
+              {searchResult &&
+                searchResult
                   .sort((x) => 0.5 - Math.random())
                   .map((d, i) => <TrackView obj={d} i={i + 1} key={i} />)}
             </tbody>

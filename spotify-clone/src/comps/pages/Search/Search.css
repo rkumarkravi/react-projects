@@ -1,12 +1,22 @@
+.search-container {
+  padding: 1em;
+}
 input[type="text"] {
-  width: 40%;
   padding: 12px 20px;
   margin: 8px 14px;
   outline: none;
-  background-color: transparent;
-  color: green;
-  border: 1px solid green;
-  border-radius: 4px;
+  background-color: white;
+  color: black;
+  border: 1px solid black;
+  border-radius: 2em;
+  position: absolute;
+  top: 0.5em;
+  z-index: 1;
+  width: 35em;
+  left: 33em;
+}
+input[type="text"]::after{
+  content:'🔍';
 }
 
 .searchData {
@@ -21,7 +31,8 @@ input[type="text"] {
   height: 3em;
   cursor: pointer;
 }
-.searchData > table > thead > tr > th ,.searchData > table > tbody > tr > td {
+.searchData > table > thead > tr > th,
+.searchData > table > tbody > tr > td {
   padding: 1em;
   text-align: left;
 }

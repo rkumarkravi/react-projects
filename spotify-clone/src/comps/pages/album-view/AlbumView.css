@@ -3,8 +3,8 @@
     display: flex;
 }
 .top-track-view > img{
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
 }
 .top-track-view > ul{
   list-style: none;

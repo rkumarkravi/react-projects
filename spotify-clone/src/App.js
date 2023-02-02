@@ -7,16 +7,17 @@ import Control from "./comps/control/Control";
 import { useRoutes } from "react-router-dom";
 import Search from "./comps/pages/Search/Search";
 import { Alert, Snackbar } from "@mui/material";
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { snackBarAction } from "./redux-conf/slices/generalSlice";
-import AlbumView from './comps/pages/album-view/AlbumView';
+import AlbumView from "./comps/pages/album-view/AlbumView";
 export const UserContext = createContext();
 function App() {
   const state = useSelector((state) => state.state);
-  const dispatch=useDispatch();
+  const playerState = useSelector((state) => state.player);
+  const dispatch = useDispatch();
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     dispatch(snackBarAction(false));
@@ -29,7 +30,8 @@ function App() {
     {
       path: "/search",
       element: <Search />,
-    },{
+    },
+    {
       path: "/album",
       element: <AlbumView />,
     },
@@ -38,20 +40,28 @@ function App() {
   return (
     <>
       <div className="app">
-        <div className="main">
-        <Sidebar />
-        <div className="app__nav-body">
-          <Navbar />
-          {element}
+        <div className="main" style={{gridTemplateRows:playerState.mp.src?"86.5% auto":"100%"}}>
+          <Sidebar />
+          <div className="app__nav-body">
+            <Navbar />
+            {element}
+          </div>
         </div>
-        </div>
-        
-      <Control />
+
+        <Control />
       </div>
-      <Snackbar open={state.errorMsg.show} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'bottom',
-          horizontal: 'right' }}>
-        <Alert onClose={handleClose} severity={state.errorMsg.severity} sx={{ width: '100%' }}>
-        {state.errorMsg.message}
+      <Snackbar
+        open={state.errorMsg.show}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert
+          onClose={handleClose}
+          severity={state.errorMsg.severity}
+          sx={{ width: "100%" }}
+        >
+          {state.errorMsg.message}
         </Alert>
       </Snackbar>
     </>
