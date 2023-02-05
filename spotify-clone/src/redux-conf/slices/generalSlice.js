@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   userData: { name: "ravi Kumar1" },
   loading: false,
-  errorMsg: { message: "", severity: "success", show: false },
+  errorMsg: { message: "", severity: "success", show: false }
 };
 
 const generalSlice = createSlice({
@@ -24,7 +24,7 @@ const generalSlice = createSlice({
     },
     snackBarAction: (state, action) => {
       state.errorMsg.show = action.payload;
-    },
+    }
   },
 });
 
@@ -33,6 +33,7 @@ export const {
   setLoading,
   setErrorMsg,
   snackBarAction,
+  addHistory
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

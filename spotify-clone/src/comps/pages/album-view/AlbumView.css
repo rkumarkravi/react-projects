@@ -1,6 +1,8 @@
 .top-track-view{
     padding: 1em;
     display: flex;
+    padding-top: 6em;
+    /* background-image: linear-gradient(rgb(0 0 0 / 22%) 0,#0b0b0b 100%),var(--background-noise); */
 }
 .top-track-view > img{
     height: 250px;
@@ -23,6 +25,7 @@
 }
 .track-view {
   padding: 1em;
+  background-image: linear-gradient(rgb(0 0 0 / 3%) 0,#12121296 95%),var(--background-noise);
 }
 .track-view > table > thead {
   border-bottom: 1px solid white;
@@ -37,7 +40,7 @@
   border-collapse: collapse;
 }
 .track-node:hover {
-  background-color: #2a2a2a;
+  background-color: #c0c0c038;
   cursor: pointer;
 }
 .track-node > td:first-child {
@@ -51,4 +54,8 @@
   color: white;
   position: relative;
   left: -10px;
+}
+.album-view-style{
+  top: -74px;
+  position: relative;
 }

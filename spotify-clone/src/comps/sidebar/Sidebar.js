@@ -26,12 +26,12 @@ function Sidebar() {
         </div>
         <Link to="/"><IconWithName Icon={HomeIcon} title="Home" active="true" /></Link>
         <Link to="/search"><IconWithName Icon={SearchIcon} title="Search" active="false" /></Link>
-        <Divider />
         <IconWithName
           Icon={LibraryBooksIcon}
           title="Your Library"
           active="false"
         />
+        <Divider />
         <IconWithName
           Icon={PlaylistAddIcon}
           title="Create PlayList"

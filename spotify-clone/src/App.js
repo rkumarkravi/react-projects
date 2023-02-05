@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <div className="app">
-        <div className="main" style={{gridTemplateRows:playerState.mp.src?"86.5% auto":"100%"}}>
+        <div className="main" style={{gridTemplateRows:playerState.mp.src?"96.5% auto":"110%"}}>
           <Sidebar />
           <div className="app__nav-body">
             <Navbar />

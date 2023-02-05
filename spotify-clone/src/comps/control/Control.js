@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setTrack } from "../../redux-conf/slices/playerSlice";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import { urls } from './../../consts/consts';
 
 const Widget = styled("div")(({ theme }) => ({
   padding: 5,
@@ -77,7 +78,7 @@ export default function Control() {
   }
   const timeupdate = React.useCallback(() => {
     if (!mouseDownOnSlider) {
-      console.log("playing", mouseDownOnSlider);
+      // console.log("playing", mouseDownOnSlider);
       setPosition((mp.currentTime / mp.duration) * 100);
     } else {
       console.log("waiting to seek complete");
@@ -150,7 +151,7 @@ export default function Control() {
         <Widget>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <CoverImage>
-              <img alt={currentTrack.musicName} src={currentAlbum.albumArt} />
+              <img alt={currentTrack.musicName} src={`${urls.BASE_URL}download/file/${currentAlbum.albumArt}`} />
             </CoverImage>
             <Box sx={{ ml: 1.5, minWidth: 0 }}>
               <Typography variant="caption" fontWeight={500}>

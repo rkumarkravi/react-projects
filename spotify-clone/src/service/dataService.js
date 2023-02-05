@@ -1,9 +1,10 @@
 import axios from "axios";
 import { setErrorMsg, setLoading } from "../redux-conf/slices/generalSlice";
 import { store } from './../redux-conf/store';
+import { urls } from './../consts/consts';
 
 const axiosInstance = axios.create({
-  baseURL: `http://localhost:8080/musify/`,
+  baseURL: `${urls.BASE_URL}`,
 });
 axiosInstance.interceptors.request.use((config) => {
   store.dispatch(setLoading(true));

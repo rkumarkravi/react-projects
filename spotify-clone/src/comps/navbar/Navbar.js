@@ -8,7 +8,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useSelector } from "react-redux";
 import { LinearProgress } from "@mui/material";
-
 const Navbar = () => {
   const state = useSelector((state) => state.state);
   const [anchorEl, setAnchorEl] = useState();
@@ -19,12 +18,20 @@ const Navbar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const backwardHist=()=>{
+      window.history.back()
+  }
+
+  const forwardHist=()=>{
+    window.history.forward();
+  }
+
   return (
     <>
       <div className="Navbar">
         <div className="Navbar__arrows">
-          <ArrowBackIosIcon fontSize="medium" />
-          <ArrowForwardIosIcon fontSize="medium" />
+          <ArrowBackIosIcon fontSize="medium" onClick={()=>{backwardHist()}}/>
+          <ArrowForwardIosIcon fontSize="medium" onClick={()=>{forwardHist()}}/>
         </div>
         <div className="Navbar__right">
           <button>Upgrade</button>

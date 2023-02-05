@@ -19,7 +19,7 @@ function Track({ type, obj }) {
       )}
       {type === "big-image-title" && (
         <div className={type}>
-          <img src={obj.albumArt} alt={obj.albumName} />
+          <img src={`http://localhost:8080/musify/download/file/${obj.albumArt}`} alt={obj.albumName} />
           <h5>{obj.albumName}</h5>
           <div className="play-button">
             <PlayArrowIcon sx={{ color: grey[90] }} />

@@ -2,31 +2,44 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./AlbumView.css";
-import { convertToMinSec, sumConvertToMinSec } from "./../../../service/util";
+import {
+  convertToMinSec,
+  sumConvertToMinSec,
+} from "./../../../service/util";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import IconWithName from "../../sidebar/IconWithName/IconWithName";
 import moment from "moment/moment";
 import { useDispatch } from "react-redux";
-import { setCurrentAlbum, setTrack } from "../../../redux-conf/slices/playerSlice";
+import {
+  setCurrentAlbum,
+  setTrack,
+} from "../../../redux-conf/slices/playerSlice";
+import { urls } from "./../../../consts/consts";
 
 function AlbumView() {
   const dispatch = useDispatch();
-  const [tracks, setTracks] = useState([]);
   const location = useLocation();
   const albumData = location.state ? location.state.albumData : "";
+  const [tracks, setTracks] = useState(albumData.musicFiles);
+
   useEffect(() => {
     setTracks(albumData.musicFiles);
-  }, [albumData.musicFiles]);
+  }, [albumData]);
 
   function setPlayerData(track) {
     console.log(track);
     dispatch(setTrack(track));
     dispatch(setCurrentAlbum(albumData));
   }
+
   return (
-    <div>
-      <section className="top-track-view">
-        <img src={albumData.albumArt} alt={albumData.albumName} />
+    // style={{backgroundColor: `${dominantColour) && dominantColour}`}}
+    <div className="album-view-style" style={{backgroundColor: `${albumData.dominantColour && albumData.dominantColour}`}}>
+      <section className="top-track-view" >
+        <img
+          src={`${urls.BASE_URL}download/file/${albumData.albumArt}`}
+          alt={albumData.albumName}
+        />
         <ul>
           <li>PlayList</li>
           <li>{albumData.albumName}</li>

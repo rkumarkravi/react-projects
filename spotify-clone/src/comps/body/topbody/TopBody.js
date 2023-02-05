@@ -23,11 +23,11 @@ function TopBody() {
       <div className="track-row">
         <TrackRow data={pdata} type="image-title" />
         <TrackRow
-          trackTitle="Episodes for you"
+          trackTitle="New Collection"
           data={adata}
           type="big-image-title"
         />
-        <TrackRow
+        {/* <TrackRow
           trackTitle="Made for Ravi"
           data={adata}
           type="big-image-title"
@@ -51,7 +51,7 @@ function TopBody() {
           trackTitle="Recently played"
           data={adata}
           type="big-image-title"
-        />
+        /> */}
       </div>
     </div>
   );
