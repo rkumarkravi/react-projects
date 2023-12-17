@@ -1,22 +1,34 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 
-const TimeSelector = ({label,onChangeTime}) => {
+const TimeSelector = ({value={hour:"0",min:"0"},label,onChangeTime}) => {
   const [selectedHour, setSelectedHour] = useState('');
   const [selectedMinute, setSelectedMinute] = useState('');
-  const [time, setTime] = useState({hour:"0",min:"0"});
+  const [time, setTime] = useState(value);
 
   const handleHourChange = (e) => {
     setSelectedHour(e.target.value);
-    setTime(x=>{return {...x,hour:e.target.value}});
+    let updatedTime=time;
+    updatedTime['hour']=e.target.value
+    setTime(updatedTime);
     onChangeTime(time);
   };
 
   const handleMinuteChange = (e) => {
     setSelectedMinute(e.target.value);
-    setTime(x=>{return {...x,minute:e.target.value}});
+    let updatedTime=time;
+    updatedTime['min']=e.target.value
+    setTime(updatedTime);
     onChangeTime(time);
   };
   
+
+  useEffect(()=>{
+    if(value===""){
+      setTime({hour:"0",min:"0"});
+      setSelectedHour("");
+      setSelectedMinute("");
+    }
+  },[value]);
 
   return (
     <div>

@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const UnitSelector = ({label,hint="Select value",onChange,className=""}) => {
-  const [selectedUnit, setSelectedUnit] = useState('');
+const UnitSelector = ({value="",label,hint="Select value",onChange,className=""}) => {
+  // const [selectedUnit, setSelectedUnit] = useState(value);
 
   const handleUnitChange = (e) => {
-    setSelectedUnit(e.target.value);
+    // setSelectedUnit(e.target.value);
     onChange(e);
   };
+
+  // useEffect(()=>{
+  //   if(value===""){
+  //     setSelectedUnit("");
+  //   }
+  // },[value]);
 
   const volumeUnits = [
     'Teaspoon (tsp)',
@@ -49,7 +55,7 @@ const UnitSelector = ({label,hint="Select value",onChange,className=""}) => {
       {(label && <label htmlFor="unitSelect" className="block text-sm font-medium text-gray-600 mb-2">{label}</label>)}
       <select
         id="unitSelect"
-        value={selectedUnit}
+        value={value}
         onChange={handleUnitChange}
         className={`${className} p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500`}
         required
@@ -85,10 +91,9 @@ const UnitSelector = ({label,hint="Select value",onChange,className=""}) => {
         </optgroup>
       </select>
 
-      {/* Display the selected unit */}
-      {selectedUnit && (
+      {/* {selectedUnit && (
         <p className="mt-4">Selected Unit: {selectedUnit}</p>
-      )}
+      )} */}
     </div>
   );
 };

@@ -9,29 +9,33 @@ function CreateRecipe() {
     {
       "no": 1,
       "name": "Basic Information",
+      "id": "basicInfo",
       data: {}
     }, {
       "no": 2,
       "name": "Recipe Ingredients",
+      "id": "recipeIng",
       data: {}
     }, {
       "no": 3,
       "name": "Steps to Prepare",
+      "id": "stepsToPrepare",
       data: {}
     }, {
       "no": 4,
       "name": "Image Upload",
+      "id": "imageUpload",
       data: {}
     }, {
       "no": 5,
       "name": "Additional Info",
+      "id": "addInfo",
       data: {}
     },
   ];
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNextStep = (e) => {
-    console.log(e);
     setCurrentStep((prevStep) => prevStep + 1);
   };
 
@@ -45,6 +49,12 @@ function CreateRecipe() {
     });
   }
 
+  const onFormSubmit = (e) => {
+    console.log(e);
+    stepsList.find(x=>x.id===e.stepId).data=e.data;
+    console.log(stepsList)
+  }
+
   return (
     <div className='flex flex-row'>
       <div className='forms w-11/12'>
@@ -52,23 +62,28 @@ function CreateRecipe() {
           <h2 className="text-2xl font-bold mb-4">Step {currentStep}  {`: ${stepsList.length > 0 && stepsList.find(x => x.no === currentStep).name}`}</h2>
 
           {currentStep === 1 && (
-            <StepOneContent onNextStep={handleNextStep} />
+            // <StepOneContent onNextStep={handleNextStep} />
+            <HocWrapper ChildComponent={<StepOneContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="basicInfo" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
 
           {currentStep === 2 && (
-            <StepTwoContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            // <StepTwoContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            <HocWrapper ChildComponent={<StepTwoContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="recipeIng" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
 
           {currentStep === 3 && (
-            <StepThreeContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            // <StepThreeContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            <HocWrapper ChildComponent={<StepThreeContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="stepsToPrepare" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
 
           {currentStep === 4 && (
-            <StepFourContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            // <StepFourContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            <HocWrapper ChildComponent={<StepFourContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="imageUpload" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
 
           {currentStep === 5 && (
-            <StepFiveContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            // <StepFiveContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
+            <HocWrapper ChildComponent={<StepFiveContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="addInfo" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
         </div>
       </div>
@@ -86,28 +101,28 @@ function CreateRecipe() {
 
 }
 
-const StepOneContent = ({ onNextStep, currentStep }) => {
+const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [formData, setFormData] = useState({ receipeName: "", time: "", level: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Handle the submission of the recipe data (e.g., send it to a server)
-    console.log("Recipe Submitted:", formData);
+    // console.log("Recipe Submitted:", formData);
+    onFormSubmit({ stepId: stepId, data: formData });
 
     // Clear form fields after submission
-    setFormData({});
+    setFormData({ receipeName: "", time: "", level: "" });
   };
 
   const handleFormDataChange = (field, value) => {
-    const updateFormData = [...formData];
+    const updateFormData = { ...formData };
     updateFormData[field] = value;
     setFormData(updateFormData);
   }
 
 
-  return (<div>
-    <h2 className="text-2xl font-bold mb-4">Create Your Recipe</h2>
+  return (<div >
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label htmlFor="recipeName" className="block text-sm font-medium text-gray-600">
@@ -125,7 +140,7 @@ const StepOneContent = ({ onNextStep, currentStep }) => {
       </div>
 
       <div className="mb-4">
-        <TimeSelector label="Prepration Time" onChangeTime={(e) => handleFormDataChange(e)} />
+        <TimeSelector label="Prepration Time" value={formData.time} onChangeTime={(e) => handleFormDataChange('time', e)} />
       </div>
 
       <div className="mb-4">
@@ -146,14 +161,14 @@ const StepOneContent = ({ onNextStep, currentStep }) => {
           <p className="mt-4">You selected: {formData.level}</p>
         )}
       </div>
+      <button type="submit" className="bg-yellow-500 text-black px-4 py-2 mb-4 rounded-md mt-2">
+        Submit
+      </button>
     </form>
-    <button onClick={() => onNextStep(formData)} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-blue-700">
-      Next
-    </button>
   </div>);
 };
 
-const StepTwoContent = ({ onPrevStep, onNextStep, currentStep }) => {
+const StepTwoContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [ingredients, setIngredients] = useState([
     { id: 1, name: '', quantity: '', unit: '' }
   ]);
@@ -173,9 +188,18 @@ const StepTwoContent = ({ onPrevStep, onNextStep, currentStep }) => {
     setIngredients(updatedIngredients);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onFormSubmit({ stepId: stepId, data: ingredients });
+
+    // Clear form fields after submission
+    setIngredients([{ id: 1, name: '', quantity: '', unit: '' }]);
+  };
+
   return (
     <div>
-      <form >
+      <form onSubmit={handleSubmit}>
         {ingredients.map((ingredient, index) => (
           <div key={ingredient.id} className="mb-4">
             <label htmlFor={`ingredientName${index}`} className="block text-sm font-medium text-gray-600">
@@ -204,6 +228,7 @@ const StepTwoContent = ({ onPrevStep, onNextStep, currentStep }) => {
               />
               <UnitSelector
                 hint="Select unit"
+                value={ingredient.unit}
                 onChange={(e) => handleIngredientChange(index, 'unit', e.target.value)}
                 className='ml-1'
               />
@@ -219,18 +244,15 @@ const StepTwoContent = ({ onPrevStep, onNextStep, currentStep }) => {
         <button type="button" onClick={handleAddIngredient} className="bg-black text-white px-4 py-2 mb-4 rounded-md mt-4">
           Add Ingredient
         </button>
+        <button type="submit" className="bg-yellow-500 text-black px-4 py-2 mb-4 rounded-md mt-4 ml-2">
+          Submit
+        </button>
       </form>
-      <button onClick={onPrevStep} className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-        Previous
-      </button>
-      <button onClick={() => onNextStep(ingredients)} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-blue-700">
-        Next
-      </button>
     </div>
   );
 };
 
-const StepThreeContent = ({ onPrevStep, onNextStep, currentStep }) => {
+const StepThreeContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [steps, setSteps] = useState([{ id: 1, stepNumber: 1, description: '' }]);
 
   const handleStepChange = (index, field, value) => {
@@ -250,8 +272,8 @@ const StepThreeContent = ({ onPrevStep, onNextStep, currentStep }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle the form submission (e.g., send data to a server)
-    console.log('Submitted Steps:', steps);
+    onFormSubmit({ stepId: stepId, data: steps });
+    setSteps([]);
   };
 
   return (
@@ -282,18 +304,15 @@ const StepThreeContent = ({ onPrevStep, onNextStep, currentStep }) => {
         <button type="button" onClick={handleAddStep} className="bg-black text-white px-4 py-2 rounded-md mt-4 mb-2">
           Add Step
         </button>
+        <button type="submit" className="bg-yellow-500 text-black px-4 py-2 mb-4 rounded-md mt-4 ml-2">
+          Submit
+        </button>
       </form>
-      <button onClick={onPrevStep} className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-        Previous
-      </button>
-      <button onClick={() => onNextStep(steps)} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-blue-700">
-        Next
-      </button>
     </div>
   );
 };
 
-const StepFourContent = ({ onPrevStep, onNextStep, currentStep }) => {
+const StepFourContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [selectedImages, setSelectedImages] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
@@ -318,8 +337,9 @@ const StepFourContent = ({ onPrevStep, onNextStep, currentStep }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., upload images to a server)
-    console.log('Submitted Images:', imageFiles);
+    onFormSubmit({ stepId: stepId, data: imageFiles });
+    setImageFiles([]);
+    setSelectedImages([]);
   };
 
   return (
@@ -359,30 +379,23 @@ const StepFourContent = ({ onPrevStep, onNextStep, currentStep }) => {
           </div>
         )}
 
-        {/* <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded-md mt-4">
-        Submit Images
-      </button> */}
+        <button type="submit" className="bg-yellow-500 text-black px-4 py-2 rounded-md mt-2 mb-2">
+          Submit Images
+        </button>
       </form>
-      <button onClick={onPrevStep} className="mt-2 mr-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-        Previous
-      </button>
-      <button onClick={() => onNextStep(imageFiles)} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-blue-700">
-        Next
-      </button>
     </div>
   );
 };
 
-const StepFiveContent = ({ onNextStep, onPrevStep, currentStep }) => {
+const StepFiveContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [tags, setTags] = useState('');
   const [additionalInfo, setAdditionalInfo] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can handle the form submission here, e.g., send data to a server
-    console.log('Submitted Additional Info:', { tags, additionalInfo });
-    // Move to the next step
-    onNextStep();
+    onFormSubmit({ stepId: stepId, data: { tags: tags, addInfo: additionalInfo } });
+    setTags('');
+    setAdditionalInfo('');
   };
 
   return (
@@ -412,14 +425,28 @@ const StepFiveContent = ({ onNextStep, onPrevStep, currentStep }) => {
             className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           />
         </div>
+        <button type="submit" className="bg-yellow-500 text-black px-4 py-2 mb-4 rounded-md mt-1">
+          Submit
+        </button>
       </form>
-      <button onClick={onPrevStep} className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
-        Previous
-      </button>
-      <button onClick={() => onNextStep({ tags: tags, addInfo: additionalInfo })} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-blue-700">
-        Next
-      </button>
     </div>
+  );
+};
+
+const HocWrapper = ({ ChildComponent, handlePrevStep, handleNextStep, stepList, currentStep }) => {
+  return (
+    <div>
+      {ChildComponent}
+      <div className='flex flex-row justify-end'>
+        {1 !== currentStep && <button onClick={handlePrevStep} className="mr-2 bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700">
+          Previous
+        </button>}
+        {stepList.length !== currentStep && <button onClick={handleNextStep} className="bg-yellow-500 text-black px-4 py-2 rounded-md hover:bg-yellow-700 hover:text-white">
+          Next
+        </button>}
+      </div>
+    </div>
+
   );
 };
 

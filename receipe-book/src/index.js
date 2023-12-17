@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateRecipe from "./pages/CreateRecipe";
+import CreateRecipeV2 from "./pages/CreateRecipeV2";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,7 @@ const router = createBrowserRouter([
         index: true
       },
       {
-        element: <CreateRecipe />,
+        element: <CreateRecipeV2 />,
         path:"/create-your-receipe"
       },
     ],
