@@ -1,38 +1,38 @@
 /* eslint-disable no-unreachable */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../components/Button';
 import TimeSelector from '../components/TimeSelector';
 import UnitSelector from '../components/UnitSelector';
-
+import { MdArrowForwardIos } from "react-icons/md";
 function CreateRecipe() {
-  const stepsList = [
+  const [stepsList,setStepsList] = useState([
     {
       "no": 1,
       "name": "Basic Information",
       "id": "basicInfo",
-      data: {}
+      data: null
     }, {
       "no": 2,
       "name": "Recipe Ingredients",
       "id": "recipeIng",
-      data: {}
+      data: null
     }, {
       "no": 3,
       "name": "Steps to Prepare",
       "id": "stepsToPrepare",
-      data: {}
+      data: null
     }, {
       "no": 4,
       "name": "Image Upload",
       "id": "imageUpload",
-      data: {}
+      data: null
     }, {
       "no": 5,
       "name": "Additional Info",
       "id": "addInfo",
-      data: {}
+      data: null
     },
-  ];
+  ]);
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNextStep = (e) => {
@@ -45,14 +45,18 @@ function CreateRecipe() {
 
   function getAllSetps() {
     return stepsList.map(x => {
-      return <div key={x.no} className='mb-2 p-3 bg-black text-white rounded-md shadow-md cursor-pointer' onClick={() => { setCurrentStep(x.no) }}>{x.name}</div>;
+      return (<div key={x.no} className={`mb-2 p-3 rounded-md shadow-md cursor-pointer ${currentStep===x.no?'bg-yellow-500 text-black':'bg-black text-white'}`} onClick={() => { setCurrentStep(x.no) }}>
+        <div className="flex flex-row items-center">{currentStep===x.no && <MdArrowForwardIos/>}
+        <span className="ml-1">{x.name}</span></div>
+        </div>);
     });
   }
 
   const onFormSubmit = (e) => {
     console.log(e);
     stepsList.find(x=>x.id===e.stepId).data=e.data;
-    console.log(stepsList)
+    // console.log(stepsList)
+    setStepsList(stepsList)
   }
 
   return (
@@ -112,7 +116,7 @@ const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
     onFormSubmit({ stepId: stepId, data: formData });
 
     // Clear form fields after submission
-    setFormData({ receipeName: "", time: "", level: "" });
+    // setFormData({ receipeName: "", time: "", level: "" });
   };
 
   const handleFormDataChange = (field, value) => {
@@ -121,6 +125,13 @@ const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
     setFormData(updateFormData);
   }
 
+  useEffect(()=>{
+    const state=stepsList.find(x=>x.id===stepId);
+    console.log(state)
+    if(state && state.data){
+      setFormData(state.data);
+    }
+  },[]);
 
   return (<div >
     <form onSubmit={handleSubmit}>
@@ -194,8 +205,17 @@ const StepTwoContent = ({ onFormSubmit, stepId, stepsList }) => {
     onFormSubmit({ stepId: stepId, data: ingredients });
 
     // Clear form fields after submission
-    setIngredients([{ id: 1, name: '', quantity: '', unit: '' }]);
+    // setIngredients([{ id: 1, name: '', quantity: '', unit: '' }]);
   };
+
+  useEffect(()=>{
+    const state=stepsList.find(x=>x.id===stepId);
+    console.log(state)
+    if(state && state.data){
+      setIngredients(state.data);
+    }
+  },[]);
+
 
   return (
     <div>
@@ -273,13 +293,21 @@ const StepThreeContent = ({ onFormSubmit, stepId, stepsList }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onFormSubmit({ stepId: stepId, data: steps });
-    setSteps([]);
+    // setSteps([{ id: 1, stepNumber: 1, description: '' }]);
   };
+
+  useEffect(()=>{
+    const state=stepsList.find(x=>x.id===stepId);
+    console.log(state)
+    if(state && state.data){
+      setSteps(state.data)
+    }
+  },[]);
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <h2>Steps to Prepare</h2>
+        {/* <h2>Steps to Prepare</h2> */}
         {steps.map((step, index) => (
           <div key={step.id} className="mb-4">
             <label htmlFor={`stepDescription${index}`} className="block text-sm font-medium text-gray-600">
@@ -338,9 +366,18 @@ const StepFourContent = ({ onFormSubmit, stepId, stepsList }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onFormSubmit({ stepId: stepId, data: imageFiles });
-    setImageFiles([]);
-    setSelectedImages([]);
+    // setImageFiles([]);
+    // setSelectedImages([]);
   };
+
+  useEffect(()=>{
+    const state=stepsList.find(x=>x.id===stepId);
+    console.log(state)
+    if(state && state.data){
+      setImageFiles(state.data);
+      setSelectedImages(state.data);
+    }
+  },[]);
 
   return (
     <div>
@@ -393,10 +430,19 @@ const StepFiveContent = ({ onFormSubmit, stepId, stepsList }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onFormSubmit({ stepId: stepId, data: { tags: tags, addInfo: additionalInfo } });
-    setTags('');
-    setAdditionalInfo('');
+    onFormSubmit({ stepId: stepId, data: { tags: tags, additionalInfo: additionalInfo } });
+    // setTags('');
+    // setAdditionalInfo('');
   };
+
+  useEffect(()=>{
+    const state=stepsList.find(x=>x.id===stepId);
+    console.log(state)
+    if(state && state.data){
+      setTags(state.data.tags);
+      setAdditionalInfo(state.data.additionalInfo);
+    }
+  },[]);
 
   return (
     <div>

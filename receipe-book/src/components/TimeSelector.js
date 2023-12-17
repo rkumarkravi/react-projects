@@ -27,6 +27,9 @@ const TimeSelector = ({value={hour:"0",min:"0"},label,onChangeTime}) => {
       setTime({hour:"0",min:"0"});
       setSelectedHour("");
       setSelectedMinute("");
+    }else{
+      setSelectedHour(value.hour);
+      setSelectedMinute(value.min);
     }
   },[value]);
 
