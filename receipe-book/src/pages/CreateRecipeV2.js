@@ -4,8 +4,11 @@ import Button from '../components/Button';
 import TimeSelector from '../components/TimeSelector';
 import UnitSelector from '../components/UnitSelector';
 import { MdArrowForwardIos } from "react-icons/md";
+import { IoCloseCircle } from "react-icons/io5";
+import { TiTickOutline } from "react-icons/ti";
+import cookingImage from "../assets/7795595_3753983.svg";
 function CreateRecipe() {
-  const [stepsList,setStepsList] = useState([
+  const [stepsList, setStepsList] = useState([
     {
       "no": 1,
       "name": "Basic Information",
@@ -31,9 +34,11 @@ function CreateRecipe() {
       "name": "Additional Info",
       "id": "addInfo",
       data: null
-    },
+    }
   ]);
   const [currentStep, setCurrentStep] = useState(1);
+  const [submitStatus, setSubmitStatus] = useState(false);
+  const [finalRespData, setFinalRespData] = useState({});
 
   const handleNextStep = (e) => {
     setCurrentStep((prevStep) => prevStep + 1);
@@ -45,25 +50,47 @@ function CreateRecipe() {
 
   function getAllSetps() {
     return stepsList.map(x => {
-      return (<div key={x.no} className={`mb-2 p-3 rounded-md shadow-md cursor-pointer ${currentStep===x.no?'bg-yellow-500 text-black':'bg-black text-white'}`} onClick={() => { setCurrentStep(x.no) }}>
-        <div className="flex flex-row items-center">{currentStep===x.no && <MdArrowForwardIos/>}
-        <span className="ml-1">{x.name}</span></div>
-        </div>);
+      return (
+        <div key={x.no}
+          className={`mb-2 p-3 rounded-md shadow-md cursor-pointer 
+          ${currentStep === x.no ? 'bg-yellow-500 text-black' : `${x.data != null ? 'bg-green-500 text-black' : 'bg-black text-white'}`}
+          `}
+          onClick={() => { setCurrentStep(x.no) }}>
+          <div className="flex flex-row items-center">
+            {(currentStep === x.no && x.data == null) && <MdArrowForwardIos />}
+            {x.data != null && <TiTickOutline />}
+            <span className="ml-1">{x.name}</span>
+          </div>
+        </div>
+      );
     });
   }
 
   const onFormSubmit = (e) => {
     console.log(e);
-    stepsList.find(x=>x.id===e.stepId).data=e.data;
+    stepsList.find(x => x.id === e.stepId).data = e.data;
     // console.log(stepsList)
     setStepsList(stepsList)
   }
+
+  const onFinalSubmit = () => {
+    setCurrentStep(-1);
+    setFinalRespData({});
+    setSubmitStatus(true);
+    console.log("dsfsd 1")
+    setTimeout(() => {
+      stepsList.forEach(x => console.log("Final Data of ", x.id, " data is:", x.data));
+      setSubmitStatus(false);
+      setFinalRespData({ rs: "S", rd: "Submitted Successfully", payload: { shareLink: "https://google.com", addInfo: [{ name: "share", value: "https://google.com" }] } });
+    }, 10000);
+    console.log("dsfsd 2")
+  };
 
   return (
     <div className='flex flex-row'>
       <div className='forms w-11/12'>
         <div className="mx-auto mt-8 p-3 bg-white rounded-md shadow-md">
-          <h2 className="text-2xl font-bold mb-4">Step {currentStep}  {`: ${stepsList.length > 0 && stepsList.find(x => x.no === currentStep).name}`}</h2>
+          <h2 className="text-2xl font-bold mb-4">Step {currentStep === -1 ? stepsList.length + 1 : currentStep}  {`: ${(stepsList.length > 0 && currentStep !== -1) ? stepsList.find(x => x.no === currentStep).name : "Final"}`}</h2>
 
           {currentStep === 1 && (
             // <StepOneContent onNextStep={handleNextStep} />
@@ -89,21 +116,58 @@ function CreateRecipe() {
             // <StepFiveContent onPrevStep={handlePrevStep} onNextStep={handleNextStep} />
             <HocWrapper ChildComponent={<StepFiveContent onFormSubmit={onFormSubmit} stepsList={stepsList} stepId="addInfo" />} handlePrevStep={handlePrevStep} handleNextStep={handleNextStep} stepList={stepsList} currentStep={currentStep} />
           )}
+
+          {currentStep === -1 && (
+            <StepFinalContent submitStatus={submitStatus} data={finalRespData} />
+          )}
         </div>
       </div>
       <div className='steps w-8/12'>
         <div className="mx-auto mt-8 ml-3 p-3 bg-gray-800 rounded-md shadow-md">
           <h2 className="text-2xl font-bold mb-4 text-white">Step {currentStep}</h2>
           {getAllSetps()}
-          <Button text="Submit Your Recipe" disabled={currentStep !== 5} />
+          <div className='flex justify-start items-center'>
+            <Button text="Submit Your Recipe" onClick={onFinalSubmit} disabled={currentStep !== stepsList.length || submitStatus} />
+            {
+              submitStatus && <><svg className="animate-spin ml-1 mr-3 h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg> <span className='text-white'>Processing... </span></>
+            }
+          </div>
         </div>
       </div>
     </div>
   );
-
-
-
 }
+
+const StepFinalContent = ({ submitStatus, data }) => {
+  return (
+    <div className="mb-4 relative">
+      {submitStatus &&
+        <div>
+          <div className='animate-bounce text-center text-black font-mono'>{submitStatus ? "Submitting..." : ""}</div>
+          <img src={cookingImage} className="animate-pulse " alt='cookingImage' />
+        </div>
+      }
+      {
+        (!submitStatus && data.rs && data.rs === 'S') &&
+        <div>
+          <h1 className='font-bold text-yellow-600'>{data.rd}</h1>
+          <div>
+            <h2 className='font-bold'>Additional Infos:</h2>
+            <ul>
+              {data.payload.addInfo && data.payload.addInfo.map(x => <li><span className='font-bold'>{x.name}</span>:{x.value}</li>)}
+            </ul>
+          </div>
+        </div>
+      }
+      {
+        (!submitStatus && data.rs && data.rs === 'F') &&
+        <div>{data.rd} 🥺</div>
+      }
+    </div>);
+};
 
 const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
   const [formData, setFormData] = useState({ receipeName: "", time: "", level: "" });
@@ -125,13 +189,13 @@ const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
     setFormData(updateFormData);
   }
 
-  useEffect(()=>{
-    const state=stepsList.find(x=>x.id===stepId);
+  useEffect(() => {
+    const state = stepsList.find(x => x.id === stepId);
     console.log(state)
-    if(state && state.data){
+    if (state && state.data) {
       setFormData(state.data);
     }
-  },[]);
+  }, []);
 
   return (<div >
     <form onSubmit={handleSubmit}>
@@ -208,13 +272,13 @@ const StepTwoContent = ({ onFormSubmit, stepId, stepsList }) => {
     // setIngredients([{ id: 1, name: '', quantity: '', unit: '' }]);
   };
 
-  useEffect(()=>{
-    const state=stepsList.find(x=>x.id===stepId);
+  useEffect(() => {
+    const state = stepsList.find(x => x.id === stepId);
     console.log(state)
-    if(state && state.data){
+    if (state && state.data) {
       setIngredients(state.data);
     }
-  },[]);
+  }, []);
 
 
   return (
@@ -296,13 +360,13 @@ const StepThreeContent = ({ onFormSubmit, stepId, stepsList }) => {
     // setSteps([{ id: 1, stepNumber: 1, description: '' }]);
   };
 
-  useEffect(()=>{
-    const state=stepsList.find(x=>x.id===stepId);
+  useEffect(() => {
+    const state = stepsList.find(x => x.id === stepId);
     console.log(state)
-    if(state && state.data){
+    if (state && state.data) {
       setSteps(state.data)
     }
-  },[]);
+  }, []);
 
   return (
     <div>
@@ -370,14 +434,14 @@ const StepFourContent = ({ onFormSubmit, stepId, stepsList }) => {
     // setSelectedImages([]);
   };
 
-  useEffect(()=>{
-    const state=stepsList.find(x=>x.id===stepId);
+  useEffect(() => {
+    const state = stepsList.find(x => x.id === stepId);
     console.log(state)
-    if(state && state.data){
+    if (state && state.data) {
       setImageFiles(state.data);
       setSelectedImages(state.data);
     }
-  },[]);
+  }, []);
 
   return (
     <div>
@@ -399,20 +463,21 @@ const StepFourContent = ({ onFormSubmit, stepId, stepsList }) => {
         {selectedImages.length > 0 && (
           <div className="mt-4">
             <h3>Selected Images:</h3>
-            <ul>
+            <div>
               {selectedImages.map((imageUrl, index) => (
-                <li key={index} className="flex items-center mt-2">
+                <div key={index} className="flex items-center mt-2 relative">
                   <img src={imageUrl} alt={`food-${index}`} className="w-16 h-16 object-cover rounded mr-2" />
-                  <button
+                  {/* <button
                     type="button"
                     onClick={() => handleRemoveImage(index)}
                     className="text-red-500 border border-red-500 px-2 py-1 rounded"
                   >
                     Remove
-                  </button>
-                </li>
+                  </button> */}
+                  <span className='absolute top-0 right-0' onClick={() => handleRemoveImage(index)}><IoCloseCircle className='hover:text-red-500' /></span>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
         )}
 
@@ -435,14 +500,14 @@ const StepFiveContent = ({ onFormSubmit, stepId, stepsList }) => {
     // setAdditionalInfo('');
   };
 
-  useEffect(()=>{
-    const state=stepsList.find(x=>x.id===stepId);
+  useEffect(() => {
+    const state = stepsList.find(x => x.id === stepId);
     console.log(state)
-    if(state && state.data){
+    if (state && state.data) {
       setTags(state.data.tags);
       setAdditionalInfo(state.data.additionalInfo);
     }
-  },[]);
+  }, []);
 
   return (
     <div>
