@@ -1,13 +1,15 @@
 /* eslint-disable no-unreachable */
 import React, { useEffect, useState } from 'react'
-import Button from '../components/Button';
-import TimeSelector from '../components/TimeSelector';
-import UnitSelector from '../components/UnitSelector';
+import Button from '../../components/Button';
+import TimeSelector from '../../components/TimeSelector';
+import UnitSelector from '../../components/UnitSelector';
 import { MdArrowForwardIos } from "react-icons/md";
 import { IoCloseCircle } from "react-icons/io5";
 import { TiTickOutline } from "react-icons/ti";
 import cookingImage from "../assets/7795595_3753983.svg";
-function CreateRecipe() {
+import { toast } from 'react-toastify';
+
+function CreateRecipeV2() {
   const [stepsList, setStepsList] = useState([
     {
       "no": 1,
@@ -73,23 +75,28 @@ function CreateRecipe() {
     setStepsList(stepsList)
   }
 
-  function isFinalSubmitAllowed(){
-    return stepsList.every(z=>z.data!=null);
+  function isFinalSubmitAllowed() {
+    return stepsList.every(z => z.data != null);
   }
 
   const onFinalSubmit = () => {
-    if(!isFinalSubmitAllowed){
+    if (!isFinalSubmitAllowed()) {
+      toast.error('Steps not completed!');
       return;
     }
     setCurrentStep(-1);
     setFinalRespData({});
     setSubmitStatus(true);
     console.log("dsfsd 1")
-    setTimeout(() => {
-      stepsList.forEach(x => console.log("Final Data of ", x.id, " data is:", x.data));
+    // setTimeout(() => {
+      // stepsList.forEach(x => console.log("Final Data of ", x.id, " data is:", x.data));
       setSubmitStatus(false);
-      setFinalRespData({ rs: "S", rd: "Submitted Successfully", payload: { shareLink: "https://google.com", addInfo: [{ name: "share", value: "https://google.com" }] } });
-    }, 10000);
+      fetch('/recipes', { method: "POST", body: JSON.stringify(stepsList),headers: {"Content-type": "application/json; charset=UTF-8"}})
+        .then((response) => response.json())
+        .then((data) => setFinalRespData(data))
+        .catch((error) => { console.error('Error fetching recipes:', error); toast.error('Steps not completed!'); });
+      // setFinalRespData({ rs: "S", rd: "Submitted Successfully", payload: { shareLink: "https://google.com", addInfo: [{ name: "share", value: "https://google.com" }] } });
+    // }, 10000);
     console.log("dsfsd 2")
   };
 
@@ -134,7 +141,7 @@ function CreateRecipe() {
           <h2 className="text-2xl font-bold mb-4 text-white">Step {currentStep}</h2>
           {getAllSetps()}
           <div className='flex justify-start items-center'>
-            <Button text="Submit Your Recipe" onClick={onFinalSubmit} disabled={currentStep !== stepsList.length || submitStatus } />
+            <Button text="Submit Your Recipe" onClick={onFinalSubmit} disabled={currentStep !== stepsList.length || submitStatus} />
             {
               submitStatus && <><svg className="animate-spin ml-1 mr-3 h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -161,6 +168,7 @@ const StepFinalContent = ({ submitStatus, data }) => {
         (!submitStatus && data.rs && data.rs === 'S') &&
         <div>
           <h1 className='font-bold text-yellow-600'>{data.rd}</h1>
+          <a href={data.payload.shareableLink}>{data.payload.shareableLink}</a>
           <div>
             <h2 className='font-bold'>Additional Infos:</h2>
             <ul>
@@ -177,7 +185,7 @@ const StepFinalContent = ({ submitStatus, data }) => {
 };
 
 const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
-  const [formData, setFormData] = useState({ receipeName: "", time: "", level: "" });
+  const [formData, setFormData] = useState({ receipeName: "", time: "", level: "",mealType: "" });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -241,6 +249,25 @@ const StepOneContent = ({ onFormSubmit, stepId, stepsList }) => {
         {/* Display the selected option */}
         {formData.level && (
           <p className="mt-4">You selected: {formData.level}</p>
+        )}
+      </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-600 mb-2">Select Meal Type</label>
+        <select
+          value={formData.mealType}
+          onChange={(e) => handleFormDataChange('mealType', e.target.value)}
+          className="block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+        >
+          <option value="" disabled>Select meal type</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Lunch">Lunch</option>
+          <option value="Snacks">Snacks</option>
+          <option value="Dinner">Dinner</option>
+        </select>
+
+        {/* Display the selected option */}
+        {formData.level && (
+          <p className="mt-4">You selected: {formData.mealType}</p>
         )}
       </div>
       <button type="submit" className="bg-yellow-500 text-black px-4 py-2 mb-4 rounded-md mt-2">
@@ -568,4 +595,4 @@ const HocWrapper = ({ ChildComponent, handlePrevStep, handleNextStep, stepList, 
   );
 };
 
-export default CreateRecipe;
+export default CreateRecipeV2;

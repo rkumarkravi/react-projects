@@ -1,8 +1,8 @@
 /* eslint-disable no-unreachable */
 import React, { useState } from 'react'
-import Button from '../components/Button';
-import TimeSelector from '../components/TimeSelector';
-import UnitSelector from '../components/UnitSelector';
+import Button from '../../components/Button';
+import TimeSelector from '../../components/TimeSelector';
+import UnitSelector from '../../components/UnitSelector';
 
 function CreateRecipe() {
   const stepsList = [

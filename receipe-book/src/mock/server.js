@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { generateRecipesData } = require('./randomRecipe');
 
 const app = express();
 const PORT = 4000;
@@ -28,10 +29,13 @@ app.get('/recipes/:recipeId', (req, res) => {
 
 // Create a new recipe
 app.post('/recipes', (req, res) => {
-  const newRecipe = req.body;
+  console.log(req.body)
+  const newRecipe = {"body":req.body};
   newRecipe.recipeId = Date.now(); // Assign a unique ID
   recipes.push(newRecipe);
-  res.status(201).json(newRecipe);
+  let response={ rs: "S", rd: "Submitted Successfully", payload: { shareableLink: "https://google.com", addInfo: [{ name: "share", value: "https://google.com" }] } }
+  response.payload.shareableLink+=`/${newRecipe.recipeId}`;
+  res.status(201).json(response);
 });
 
 // Modify a recipe by ID
@@ -62,6 +66,10 @@ app.delete('/recipes/:recipeId', (req, res) => {
     res.status(404).json({ error: 'Recipe not found' });
   }
 });
+
+app.get('/recipes/random/:count',(req,res)=>{
+  res.json(generateRecipesData(parseInt(req.params.count)));
+})
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
