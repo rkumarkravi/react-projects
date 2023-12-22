@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import RecipeSection from '../components/RecipeSection';
 
 function Home() {
@@ -28,6 +28,16 @@ function Home() {
     
     // Add more dinner recipes
   ];
+
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    // Fetch recipes from the Express server
+    fetch('/recipes')
+      .then((response) => response.json())
+      .then((data) => setRecipes(data))
+      .catch((error) => console.error('Error fetching recipes:', error));
+  }, []);
 
   return (
     <div className="p-8">

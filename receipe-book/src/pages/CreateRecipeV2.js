@@ -73,7 +73,14 @@ function CreateRecipe() {
     setStepsList(stepsList)
   }
 
+  function isFinalSubmitAllowed(){
+    return stepsList.every(z=>z.data!=null);
+  }
+
   const onFinalSubmit = () => {
+    if(!isFinalSubmitAllowed){
+      return;
+    }
     setCurrentStep(-1);
     setFinalRespData({});
     setSubmitStatus(true);
@@ -127,7 +134,7 @@ function CreateRecipe() {
           <h2 className="text-2xl font-bold mb-4 text-white">Step {currentStep}</h2>
           {getAllSetps()}
           <div className='flex justify-start items-center'>
-            <Button text="Submit Your Recipe" onClick={onFinalSubmit} disabled={currentStep !== stepsList.length || submitStatus} />
+            <Button text="Submit Your Recipe" onClick={onFinalSubmit} disabled={currentStep !== stepsList.length || submitStatus } />
             {
               submitStatus && <><svg className="animate-spin ml-1 mr-3 h-8 w-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
