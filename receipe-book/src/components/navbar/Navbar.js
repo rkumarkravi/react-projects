@@ -31,7 +31,7 @@ export default function Navbar() {
           <SearchBar />
         </div>
         { !checkPutAside && <div>
-          <Link to="/create-your-receipe" className="text-white">
+          <Link to="/create-your-recipe" className="text-white">
             <Button text="Create Your Recipes"/>
           </Link>
         </div>}

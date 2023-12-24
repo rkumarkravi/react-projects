@@ -6,6 +6,7 @@ import App from "./App";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import CreateRecipeV3 from "./pages/create-recipe/CreateRecipeV3";
+import ViewRecipe from "./pages/ViewRecipe";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +20,13 @@ const router = createBrowserRouter([
       },
       {
         element: <CreateRecipeV3 />,
-        path:"/create-your-receipe"
+        path:"/create-your-recipe"
+      },{
+        element: <ViewRecipe />,
+        path:"/view-recipe/:recipeId",
+        loader: async ({ params }) => {
+          return fetch(`/recipes/${params.recipeId}`);
+        },
       },
     ],
   },

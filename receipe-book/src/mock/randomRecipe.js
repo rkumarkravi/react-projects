@@ -64,16 +64,17 @@ const generateRandomRecipe = (recipeId) => {
       },
     ],
     recipeId: recipeId,
+    createdDateTime :Date.now()
   };
 };
 
 const generateRecipesData = (count) => {
   const recipesData = [];
   for (let i = 1; i <= count; i++) {
-    const recipe = generateRandomRecipe(i);
+    const recipe = generateRandomRecipe(i+new Date().getTime());
     recipesData.push(recipe);
   }
-  console.log(recipesData);
+  console.log("generated records >>",recipesData.length);
   return recipesData;
 };
 

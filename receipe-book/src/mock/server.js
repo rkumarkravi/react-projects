@@ -32,6 +32,7 @@ app.post('/recipes', (req, res) => {
   console.log(req.body)
   const newRecipe = {"body":req.body};
   newRecipe.recipeId = Date.now(); // Assign a unique ID
+  newRecipe.createdDateTime = Date.now();
   recipes.push(newRecipe);
   let response={ rs: "S", rd: "Submitted Successfully", payload: { shareableLink: "https://google.com", addInfo: [{ name: "share", value: "https://google.com" }] } }
   response.payload.shareableLink+=`/${newRecipe.recipeId}`;
@@ -68,7 +69,9 @@ app.delete('/recipes/:recipeId', (req, res) => {
 });
 
 app.get('/recipes/random/:count',(req,res)=>{
-  res.json(generateRecipesData(parseInt(req.params.count)));
+  const data=generateRecipesData(parseInt(req.params.count));
+  recipes.push(...data);
+  res.json(data);
 })
 
 app.listen(PORT, () => {
