@@ -60,19 +60,24 @@ function ViewRecipe() {
                     )}
                 </SectionCard>
             ))}
-             <div className="w-1/4 flex justify-evenly mb-4 bg-white rounded-lg p-4">
-                <TwitterShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
-                    <TwitterIcon size={32} round={false} />
-                </TwitterShareButton>
-                <FacebookShareButton url={recipeLink} hashtag={`Check out this recipe: ${recipeLink}`}>
-                    <FacebookIcon size={32} round={false}  />
-                </FacebookShareButton>
-                <WhatsappShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
-                    <WhatsappIcon size={32} round={false}  />
-                </WhatsappShareButton>
-                <EmailShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
-                    <EmailIcon size={32} round={false}  />
-                </EmailShareButton>
+            <div className="flex justify-between items-start mb-4">
+                <div className='bg-white rounded-lg p-4 w-1/4 flex justify-evenly'>
+                    <TwitterShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
+                        <TwitterIcon size={32} round={false} />
+                    </TwitterShareButton>
+                    <FacebookShareButton url={recipeLink} hashtag={`Check out this recipe: ${recipeLink}`}>
+                        <FacebookIcon size={32} round={false} />
+                    </FacebookShareButton>
+                    <WhatsappShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
+                        <WhatsappIcon size={32} round={false} />
+                    </WhatsappShareButton>
+                    <EmailShareButton url={recipeLink} title={`Check out this recipe: ${recipeLink}`}>
+                        <EmailIcon size={32} round={false} />
+                    </EmailShareButton>
+                </div>
+                <div className='bg-white rounded-lg p-4 w-1/3 flex justify-evenly'>
+                    <h2><span className='font-bold'>Created at:</span> {new Date(data.createdDateTime).toLocaleDateString() +" | "+ new Date(data.createdDateTime).toLocaleTimeString() }</h2>
+                </div>
             </div>
         </div>
     );
