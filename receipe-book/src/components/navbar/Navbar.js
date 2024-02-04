@@ -3,23 +3,24 @@ import { MdOutlineSort } from "react-icons/md";
 import SearchBar from './Searchbar';
 import { Link, useLocation } from 'react-router-dom';
 import Button from '../Button';
+import { StateProvider } from '../../state-manage/StatePovider';
 
 export default function Navbar() {
   const location = useLocation();
   const currentPath = location.pathname;
-  var [checkPutAside,setCheckPutAside]=useState(false);
-  useEffect(()=>{
-    if(currentPath === '/create-your-receipe'){
+  var [checkPutAside, setCheckPutAside] = useState(false);
+  useEffect(() => {
+    if (currentPath === '/create-your-receipe') {
       setCheckPutAside(true);
-    }else{
+    } else {
       setCheckPutAside(false);
     }
-  },[currentPath]);
+  }, [currentPath]);
 
 
   return (
     <nav className="backdrop-blur-md">
-      <div className={`container mx-auto flex items-center ${checkPutAside?"start":"justify-between"}`}>
+      <div className={`container mx-auto flex items-center ${checkPutAside ? "start" : "justify-between"}`}>
         <div className="flex flex-row items-center">
           <MdOutlineSort className="text-white text-xl" />
           <div className="text-white text-xl font-bold m-5 ">
@@ -28,11 +29,11 @@ export default function Navbar() {
         </div>
 
         <div>
-          <SearchBar />
+            <SearchBar />
         </div>
-        { !checkPutAside && <div>
+        {!checkPutAside && <div>
           <Link to="/create-your-recipe" className="text-white">
-            <Button text="Create Your Recipes"/>
+            <Button text="Create Your Recipes" />
           </Link>
         </div>}
         <div className="md:hidden">

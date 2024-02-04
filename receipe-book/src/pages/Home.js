@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import RecipeSection from '../components/RecipeSection';
+import { useStateProvider } from '../state-manage/StatePovider';
 
 function Home() {
+  const { data, updateData } = useStateProvider();
   const [breakfastRecipes, setBreakfastRecipes] = useState(
     [
       // { id: 1, name: "Scrambled Eggs", description: "Delicious scrambled eggs with veggies." },
@@ -94,10 +96,21 @@ function Home() {
     <div className="p-8">
       <h1 className="text-5xl text-yellow-500 font-bold mb-8">Welcome to the Recipe Book</h1>
 
-      <RecipeSection title="Breakfast Recipes" recipes={breakfastRecipes} />
-      <RecipeSection title="Lunch Recipes" recipes={lunchRecipes} />
-      <RecipeSection title="Dinner Recipes" recipes={dinnerRecipes} />
-    </div>
+      {
+        data.searchText &&
+        <>
+        {JSON.stringify(data)}
+        </>
+      }
+      {
+        !data.searchText &&
+        <>
+          <RecipeSection title="Breakfast Recipes" recipes={breakfastRecipes} />
+          <RecipeSection title="Lunch Recipes" recipes={lunchRecipes} />
+          <RecipeSection title="Dinner Recipes" recipes={dinnerRecipes} />
+        </>
+      }
+    </div >
   )
 }
 

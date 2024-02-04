@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.clear-button{
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    cursor: pointer;
+  }

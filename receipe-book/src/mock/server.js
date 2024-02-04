@@ -27,6 +27,9 @@ app.get('/recipes/:recipeId', (req, res) => {
   }
 });
 
+app.post('/recipes/create/id',(req,res)=>{
+  res.status(200).send(Date.now());
+})
 // Create a new recipe
 app.post('/recipes', (req, res) => {
   console.log(req.body)
