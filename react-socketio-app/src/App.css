@@ -1,0 +1,29 @@
+.message-box{
+margin: 1em;
+}
+
+.message-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-left{
+  align-self: flex-end;
+  margin:0.5em;
+  background-color: burlywood;
+}
+
+.chat-right{
+  align-self: flex-start;
+  margin:0.5em;
+  background-color: royalblue;
+}
+
+.ctrls{
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-style{
+  width: 100%;
+}

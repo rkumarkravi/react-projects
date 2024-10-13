@@ -1,0 +1,20 @@
+.format-style{
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+}
+
+.format-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 180px;
+    margin-top: 10px;
+}
+.side-by-side{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    column-gap: 1em;
+    max-height: 350px;
+}

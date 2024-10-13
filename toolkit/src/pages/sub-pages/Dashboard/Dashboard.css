@@ -1,0 +1,6 @@
+.grid{
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 1em;
+    row-gap: 1em;
+}
